@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ext .js",
-    "prettier": "prettier --config .prettierrc 'src/**/*.js' --write"
+    "prettier": "prettier --config .prettierrc 'src/**/*.js' --write",
+    "build": "npx tsc"
   },
   "author": "Jeffery Abbott",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
   }
 }
