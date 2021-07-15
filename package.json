@@ -4,8 +4,18 @@
   "description": "Image processing API for Udacity Full Stack JavaScript nanodegree",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint 'index.js'",
+    "prettier": "prettier --config .prettierrc 'src/**/*.js' --write"
   },
   "author": "Jeffery Abbott",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2"
+  }
 }
