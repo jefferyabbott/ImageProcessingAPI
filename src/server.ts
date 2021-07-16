@@ -8,3 +8,9 @@ app.use('/api', routes);
 app.listen(port, () => {
   console.log(`Server started on port ${port}.`);
 });
+
+function myFunc() {
+  return 25;
+}
+
+export default myFunc;
