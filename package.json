@@ -14,7 +14,8 @@
   "author": "Jeffery Abbott",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sharp": "^0.28.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

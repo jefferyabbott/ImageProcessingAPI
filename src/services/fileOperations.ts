@@ -1,4 +1,5 @@
 const fs = require('fs');
+const sharp = require('sharp');
 
 function checkIfFileExists(filename: string, imageType: string): Boolean {
   try {
@@ -11,4 +12,8 @@ function checkIfFileExists(filename: string, imageType: string): Boolean {
   return false;
 }
 
-export default checkIfFileExists;
+function createThumbnailImage(filename: string) {
+  // do sharp operations here
+}
+
+export default { checkIfFileExists, createThumbnailImage };
