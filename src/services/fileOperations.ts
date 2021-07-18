@@ -15,8 +15,14 @@ export function checkIfFileExists(
   return false;
 }
 
-export function createThumbnailImage(filename: string) {
-  // do sharp operations here
+export function createThumbnailImage(filename: string): boolean {
+  sharp(`./assets/full/${filename}`)
+    .resize(200, 200)
+    .toFile(`./assets/thumb/${filename}`, function (err: string) {
+      console.log(err);
+      return false;
+    });
+  return true;
 }
 
 // export default checkIfFileExists;

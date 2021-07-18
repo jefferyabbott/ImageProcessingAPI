@@ -9,21 +9,21 @@ routes.get('/images', (req: express.Request, res: express.Response) => {
   const { height, width } = req.query;
   const filename: string = req.query.filename as string;
 
-  let error = [];
+  let incompleteQuery = [];
 
   // check if query string is missing required parameters
-  if (filename === undefined) {
-    error.push('filename is required');
+  if (!filename) {
+    incompleteQuery.push('filename is required');
   }
-  if (height === undefined) {
-    error.push('height is required');
+  if (!height) {
+    incompleteQuery.push('height is required');
   }
   if (width === undefined) {
-    error.push('width is required');
+    incompleteQuery.push('width is required');
   }
 
-  if (error.length !== 0) {
-    return res.status(400).send(error.toString());
+  if (incompleteQuery.length !== 0) {
+    return res.status(400).send(incompleteQuery.toString());
   }
 
   // check if full image exists
@@ -34,6 +34,7 @@ routes.get('/images', (req: express.Request, res: express.Response) => {
   // check if thumbnail image exists
   if (!checkIfFileExists(filename, 'thumb')) {
     console.log(`Ok, we need to make this thumbnail image: ${filename}`);
+    createThumbnailImage(filename);
   }
 
   return res.status(200).send('api/images route');
