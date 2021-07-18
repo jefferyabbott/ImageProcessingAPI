@@ -1,7 +1,10 @@
 const fs = require('fs');
 const sharp = require('sharp');
 
-function checkIfFileExists(filename: string, imageType: string): Boolean {
+export function checkIfFileExists(
+  filename: string,
+  imageType: string
+): Boolean {
   try {
     if (fs.existsSync(`./assets/${imageType}/${filename}`)) {
       return true;
@@ -12,8 +15,8 @@ function checkIfFileExists(filename: string, imageType: string): Boolean {
   return false;
 }
 
-function createThumbnailImage(filename: string) {
+export function createThumbnailImage(filename: string) {
   // do sharp operations here
 }
 
-export default { checkIfFileExists, createThumbnailImage };
+// export default checkIfFileExists;

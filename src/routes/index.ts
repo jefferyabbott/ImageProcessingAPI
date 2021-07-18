@@ -1,6 +1,9 @@
 import express from 'express';
 const routes = express.Router();
-import checkIfFileExists from '../services/fileOperations';
+import {
+  checkIfFileExists,
+  createThumbnailImage,
+} from '../services/fileOperations';
 
 routes.get('/images', (req: express.Request, res: express.Response) => {
   const { height, width } = req.query;
