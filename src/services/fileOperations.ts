@@ -5,7 +5,7 @@ import { imageType } from '../models/imageType';
 export function checkIfFileExists(
   filename: string,
   imageType: imageType
-): Boolean {
+): boolean {
   try {
     if (fs.existsSync(`./assets/${imageType}/${filename}`)) {
       return true;
