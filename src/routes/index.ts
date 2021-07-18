@@ -4,8 +4,9 @@ import {
   checkIfFileExists,
   createThumbnailImage,
 } from '../services/fileOperations';
+import { imageType } from '../models/imageType';
 
-routes.get('/images', (req: express.Request, res: express.Response) => {
+routes.get('/images', async (req: express.Request, res: express.Response) => {
   const { height, width } = req.query;
   const filename: string = req.query.filename as string;
 
@@ -27,16 +28,21 @@ routes.get('/images', (req: express.Request, res: express.Response) => {
   }
 
   // check if full image exists
-  if (!checkIfFileExists(filename, 'full')) {
+  if (!checkIfFileExists(filename, imageType.FULL)) {
     return res.status(404).send(`${filename} not found`);
   }
 
   // check if thumbnail image exists
-  if (!checkIfFileExists(filename, 'thumb')) {
-    console.log(`Ok, we need to make this thumbnail image: ${filename}`);
-    createThumbnailImage(filename);
+  if (!checkIfFileExists(filename, imageType.THUMB)) {
+    const imageResized = await createThumbnailImage(filename);
+    if (!imageResized) {
+      return res
+        .status(500)
+        .send(`${filename} thumbnail could not be created.`);
+    }
   }
 
+  // return the image thumbnail
   return res.status(200).send('api/images route');
 });
 

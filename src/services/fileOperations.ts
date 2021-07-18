@@ -1,9 +1,10 @@
 const fs = require('fs');
 const sharp = require('sharp');
+import { imageType } from '../models/imageType';
 
 export function checkIfFileExists(
   filename: string,
-  imageType: string
+  imageType: imageType
 ): Boolean {
   try {
     if (fs.existsSync(`./assets/${imageType}/${filename}`)) {
@@ -15,14 +16,14 @@ export function checkIfFileExists(
   return false;
 }
 
-export function createThumbnailImage(filename: string): boolean {
-  sharp(`./assets/full/${filename}`)
+export async function createThumbnailImage(filename: string): Promise<boolean> {
+  await sharp(`./assets/${imageType.FULL}/${filename}`)
     .resize(200, 200)
-    .toFile(`./assets/thumb/${filename}`, function (err: string) {
-      console.log(err);
-      return false;
+    .toFile(`./assets/${imageType.THUMB}/${filename}`, function (err: string) {
+      if (err) {
+        console.log(err);
+        return false;
+      }
     });
   return true;
 }
-
-// export default checkIfFileExists;
