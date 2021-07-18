@@ -1,5 +1,6 @@
 import express from 'express';
 const routes = express.Router();
+const path = require('path');
 import {
   checkIfFileExists,
   createThumbnailImage,
@@ -43,7 +44,11 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   }
 
   // return the image thumbnail
-  return res.status(200).send('api/images route');
+  return res
+    .status(200)
+    .sendFile(
+      path.join(__dirname, `../../assets/${imageType.THUMB}/${filename}`)
+    );
 });
 
 export default routes;
