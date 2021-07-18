@@ -3,15 +3,15 @@ export function validateQueryString(
   width: number,
   height: number
 ): string[] {
-  let incompleteQuery = [];
+  let incompleteQuery: string[] = [];
 
   if (!filename) {
     incompleteQuery.push('filename is required');
   }
-  if (!height || height <= 0) {
+  if (height === undefined) {
     incompleteQuery.push('height is required');
   }
-  if (!width || width <= 0) {
+  if (width === undefined) {
     incompleteQuery.push('width is required');
   }
 
