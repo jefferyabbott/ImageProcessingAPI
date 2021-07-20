@@ -25,9 +25,9 @@ export async function createThumbnailImage(
   width: number
 ): Promise<boolean> {
   try {
-    const sharped = await sharp(`./assets/${fullImage}/${filename}`)
+    const sharped = await sharp(`assets/${fullImage}/${filename}`)
       .resize(height, width)
-      .toFile(`./assets/${thumbnailImage}/${targetFilename}`);
+      .toFile(`assets/${thumbnailImage}/${targetFilename}`);
     if (sharped) {
       return true;
     } else {
