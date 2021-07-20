@@ -1,6 +1,6 @@
 # ImageProcessingAPI
 
-This API returns a thumbnail image with the requested size. It is a requirement of the Udacity Full Stack JavaScript nanodegree program.
+This API returns a thumbnail image with the requested size. It is a requirement of the **Udacity Full Stack JavaScript nanodegree program**.
 
 ## Installation
 
