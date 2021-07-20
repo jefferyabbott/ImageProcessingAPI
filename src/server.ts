@@ -8,7 +8,7 @@ app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 app.use('/api', routes);
 
-app.get('/api', (req, res) => {
+app.get('/api', (req: express.Request, res: express.Response) => {
   return res.status(200).send('Image processing server is running.');
 });
 
