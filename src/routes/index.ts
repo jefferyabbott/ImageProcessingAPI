@@ -25,21 +25,29 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   }
 
   // check if thumbnail image exists
-  if (!checkIfFileExists(filename, imageType.THUMB)) {
+  if (checkIfFileExists(filename, imageType.THUMB)) {
+    // return the image thumbnail
+    return res
+      .status(200)
+      .sendFile(
+        path.join(__dirname, `../../assets/${imageType.THUMB}/${filename}`)
+      );
+  } else {
     const imageResized = await createThumbnailImage(filename);
-    if (!imageResized) {
+    console.log(`imageResized: ${imageResized}`);
+    console.log(typeof imageResized);
+    if (imageResized === false) {
       return res
         .status(500)
         .send(`${filename} thumbnail could not be created.`);
+    } else {
+      return res
+        .status(200)
+        .sendFile(
+          path.join(__dirname, `../../assets/${imageType.THUMB}/${filename}`)
+        );
     }
   }
-
-  // return the image thumbnail
-  return res
-    .status(200)
-    .sendFile(
-      path.join(__dirname, `../../assets/${imageType.THUMB}/${filename}`)
-    );
 });
 
 export default routes;
