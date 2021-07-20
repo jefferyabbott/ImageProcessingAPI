@@ -10,14 +10,18 @@ import { validateQueryString } from '../services/queryChecker';
 
 routes.get('/images', async (req: express.Request, res: express.Response) => {
   const filename = req.query.filename as string;
-  const height = req.query.height as unknown as number;
-  const width = req.query.width as unknown as number;
+  const heightInput = req.query.height as unknown;
+  const widthInput = req.query.width as unknown;
 
   // check if query string is missing required parameters
-  const incompleteQuery = validateQueryString(filename, height, width);
+  const incompleteQuery = validateQueryString(filename, heightInput, widthInput);
   if (incompleteQuery.length !== 0) {
     return res.status(400).send(incompleteQuery.toString());
   }
+
+  // convert unknown dimensions to numbers
+  const height = heightInput as number;
+  const width = widthInput as number;
 
   // check if full image exists
   if (!checkIfFileExists(filename, imageType.FULL)) {
@@ -39,7 +43,7 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
         )
       );
   } else {
-    const imageResized = await createThumbnailImage(filename, targetFilename);
+    const imageResized = await createThumbnailImage(filename, targetFilename, height, width);
     if (imageResized === false) {
       return res
         .status(500)

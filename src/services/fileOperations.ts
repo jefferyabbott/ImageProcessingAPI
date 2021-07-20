@@ -18,11 +18,13 @@ export function checkIfFileExists(
 
 export async function createThumbnailImage(
   filename: string,
-  targetFilename: string
+  targetFilename: string,
+  height: number,
+  width: number
 ): Promise<boolean> {
   try {
     const sharped = await sharp(`./assets/${imageType.FULL}/${filename}`)
-      .resize(200, 200)
+      .resize(height, width)
       .toFile(`./assets/${imageType.THUMB}/${targetFilename}`);
     if (sharped) {
       return true;
