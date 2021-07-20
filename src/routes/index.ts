@@ -5,8 +5,9 @@ import {
   checkIfFileExists,
   createThumbnailImage,
 } from '../services/fileOperations';
-import { imageType } from '../models/imageType';
 import { validateQueryString } from '../services/queryChecker';
+const fullImage = 'full';
+const thumbnailImage = 'thumb';
 
 routes.get('/images', async (req: express.Request, res: express.Response) => {
   const filename = req.query.filename as string;
@@ -28,7 +29,7 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   const width = Number(widthInput);
 
   // check if full image exists
-  if (!checkIfFileExists(filename, imageType.FULL)) {
+  if (!checkIfFileExists(filename, fullImage)) {
     return res.status(404).send(`${filename} not found`);
   }
 
@@ -36,15 +37,12 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   const thumbnailFilename = filename.slice(0, filename.lastIndexOf('.'));
   const thumbnailFileExtension = filename.slice(filename.lastIndexOf('.'));
   const targetFilename = `${thumbnailFilename}-${height}-${width}${thumbnailFileExtension}`;
-  if (checkIfFileExists(targetFilename, imageType.THUMB)) {
+  if (checkIfFileExists(targetFilename, thumbnailImage)) {
     // return the image thumbnail
     return res
       .status(200)
       .sendFile(
-        path.join(
-          __dirname,
-          `../../assets/${imageType.THUMB}/${targetFilename}`
-        )
+        path.join(__dirname, `../../assets/${thumbnailImage}/${targetFilename}`)
       );
   } else {
     const imageResized = await createThumbnailImage(
@@ -63,7 +61,7 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
         .sendFile(
           path.join(
             __dirname,
-            `../../assets/${imageType.THUMB}/${targetFilename}`
+            `../../assets/${thumbnailImage}/${targetFilename}`
           )
         );
     }
