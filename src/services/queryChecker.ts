@@ -11,7 +11,7 @@ export function validateQueryString(
   }
 
   // check height value
-  if (!height) {
+  if (height === undefined) {
     incompleteQuery.push('height is required');
   } else if (isNaN(height as number)) {
     incompleteQuery.push('height must be a number');
@@ -20,7 +20,7 @@ export function validateQueryString(
   }
 
   // check width value
-  if (!width) {
+  if (width === undefined) {
     incompleteQuery.push('width is required');
   } else if (isNaN(width as number)) {
     incompleteQuery.push('width must be a number');
