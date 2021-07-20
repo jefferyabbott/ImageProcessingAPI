@@ -24,8 +24,8 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   }
 
   // convert unknown dimensions to numbers
-  const height = heightInput as number;
-  const width = widthInput as number;
+  const height = Number(heightInput);
+  const width = Number(widthInput);
 
   // check if full image exists
   if (!checkIfFileExists(filename, imageType.FULL)) {

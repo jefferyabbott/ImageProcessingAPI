@@ -3,7 +3,7 @@ export function validateQueryString(
   height: unknown,
   width: unknown
 ): string[] {
-  let incompleteQuery: string[] = [];
+  const incompleteQuery: string[] = [];
 
   // check filename
   if (!filename) {

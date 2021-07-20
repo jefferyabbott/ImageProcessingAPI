@@ -1,5 +1,6 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
   "plugins": ["prettier"],
   "extends": ["eslint:recommended", "prettier"],
   "rules": {
@@ -14,6 +15,7 @@
   },
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "jasmine": true
   }
 }
