@@ -15,8 +15,8 @@ export function validateQueryString(
     incompleteQuery.push('height is required');
   } else if (isNaN(height as number)) {
     incompleteQuery.push('height must be a number');
-  } else if (height as number <= 0) {
-    incompleteQuery.push('height must be greater than zero')
+  } else if ((height as number) <= 0) {
+    incompleteQuery.push('height must be greater than zero');
   }
 
   // check width value
@@ -24,8 +24,8 @@ export function validateQueryString(
     incompleteQuery.push('width is required');
   } else if (isNaN(width as number)) {
     incompleteQuery.push('width must be a number');
-  } else if (width as number <= 0) {
-    incompleteQuery.push('width must be greater than zero')
+  } else if ((width as number) <= 0) {
+    incompleteQuery.push('width must be greater than zero');
   }
 
   return incompleteQuery;

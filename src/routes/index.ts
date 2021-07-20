@@ -14,7 +14,11 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   const widthInput = req.query.width as unknown;
 
   // check if query string is missing required parameters
-  const incompleteQuery = validateQueryString(filename, heightInput, widthInput);
+  const incompleteQuery = validateQueryString(
+    filename,
+    heightInput,
+    widthInput
+  );
   if (incompleteQuery.length !== 0) {
     return res.status(400).send(incompleteQuery.toString());
   }
@@ -43,7 +47,12 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
         )
       );
   } else {
-    const imageResized = await createThumbnailImage(filename, targetFilename, height, width);
+    const imageResized = await createThumbnailImage(
+      filename,
+      targetFilename,
+      height,
+      width
+    );
     if (imageResized === false) {
       return res
         .status(500)
