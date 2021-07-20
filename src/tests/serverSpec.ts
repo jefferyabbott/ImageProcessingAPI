@@ -7,4 +7,9 @@ describe('Test endpoint responses', () => {
     const response = await request.get('/api');
     expect(response.status).toBe(200);
   });
+
+  it('invalid parameters on api/images endpoint returns 400', async () => {
+    const response = await request.get('/api/images');
+    expect(response.status).toBe(400);
+  });
 });
