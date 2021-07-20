@@ -4,7 +4,7 @@
   "description": "Image processing API for Udacity Full Stack JavaScript nanodegree",
   "main": "index.js",
   "scripts": {
-    "start": "src/server.ts",
+    "start": "nodemon src/server.ts",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "build": "npx tsc",
@@ -27,7 +27,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "jasmine": "^3.8.0",
     "jasmine-spec-reporter": "^7.0.0",
+    "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   }
 }
