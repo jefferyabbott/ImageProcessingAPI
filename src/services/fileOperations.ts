@@ -16,13 +16,21 @@ export function checkIfFileExists(
   return false;
 }
 
-export async function createThumbnailImage(filename: string): Promise<boolean> {
-  const sharped = await sharp(`./assets/${imageType.FULL}/${filename}`)
-    .resize(200, 200)
-    .toFile(`./assets/${imageType.THUMB}/${filename}`);
-  if (sharped) {
-    return true;
-  } else {
+export async function createThumbnailImage(
+  filename: string,
+  targetFilename: string
+): Promise<boolean> {
+  try {
+    const sharped = await sharp(`./assets/${imageType.FULL}/${filename}`)
+      .resize(200, 200)
+      .toFile(`./assets/${imageType.THUMB}/${targetFilename}`);
+    if (sharped) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
     return false;
   }
 }

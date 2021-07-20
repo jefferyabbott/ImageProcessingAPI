@@ -25,17 +25,21 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
   }
 
   // check if thumbnail image exists
-  if (checkIfFileExists(filename, imageType.THUMB)) {
+  const thumbnailFilename = filename.slice(0, filename.lastIndexOf('.'));
+  const thumbnailFileExtension = filename.slice(filename.lastIndexOf('.'));
+  const targetFilename = `${thumbnailFilename}-${height}-${width}${thumbnailFileExtension}`;
+  if (checkIfFileExists(targetFilename, imageType.THUMB)) {
     // return the image thumbnail
     return res
       .status(200)
       .sendFile(
-        path.join(__dirname, `../../assets/${imageType.THUMB}/${filename}`)
+        path.join(
+          __dirname,
+          `../../assets/${imageType.THUMB}/${targetFilename}`
+        )
       );
   } else {
-    const imageResized = await createThumbnailImage(filename);
-    console.log(`imageResized: ${imageResized}`);
-    console.log(typeof imageResized);
+    const imageResized = await createThumbnailImage(filename, targetFilename);
     if (imageResized === false) {
       return res
         .status(500)
@@ -44,7 +48,10 @@ routes.get('/images', async (req: express.Request, res: express.Response) => {
       return res
         .status(200)
         .sendFile(
-          path.join(__dirname, `../../assets/${imageType.THUMB}/${filename}`)
+          path.join(
+            __dirname,
+            `../../assets/${imageType.THUMB}/${targetFilename}`
+          )
         );
     }
   }
