@@ -18,6 +18,7 @@ Compile for release:
 
 ## Usage
 
+request format:
 `localhost:3000/api/images?filename={{image.jpg}}&height={{size}}&width={{size}}`
 
 example:
